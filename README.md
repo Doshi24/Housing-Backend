@@ -20,7 +20,6 @@
 We follow a **4-branch workflow** to keep the codebase clean and stable:  
 
 1. **`main`** → Production-ready, stable code.  
-2. **`develop`** → Integration branch, collects tested features before merging to `main`.  
 3. **`vinit.develop`** → Personal development branch for Vinit.  
 4. **`monil.develop`** → Personal development branch for Monil.  
 
