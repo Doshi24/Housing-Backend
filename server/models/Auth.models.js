@@ -30,7 +30,14 @@ const userSchema = new mongoose.Schema(
         Terms_n_ploliy :{
             type : Boolean,
             default : false
+        },
+        otp : {
+            type : String
+        },
+        otpexpire :{
+            type : Date
         }
+
     },
     {
         timestamps : true
