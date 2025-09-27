@@ -66,51 +66,52 @@ const login = async (req, res) =>{
 }
 
 
-// const forgetpassword = async(req, res) =>{
-//     const {phone} = req.body
+const forgetpassword = async(req, res) =>{
+    // not working 
+    const {phone} = req.body
 
-//     const finduser = await User.findOne({phone})
+    const finduser = await User.findOne({phone})
 
-//     if(!phone) return res.status(500).json({status : "unsuccess", messsage : "Phone Number not proovided" , data : null})
-//     if(!finduser.phone == phone) return  res.status(500).json({status : "unsuccess", message : "User not register" , data : null })
+    if(!phone) return res.status(500).json({status : "unsuccess", messsage : "Phone Number not proovided" , data : null})
+    if(!finduser.phone == phone) return  res.status(500).json({status : "unsuccess", message : "User not register" , data : null })
 
-//     const otp = Math.floor(100000 + Math.random()* 900000).toString()
-//     finduser.otp = otp
+    const otp = Math.floor(100000 + Math.random()* 900000).toString()
+    finduser.otp = otp
 
-//     logger.info("otp"+JSON.stringify(otp))
-//     console.log("otp " , otp)
+    logger.info("otp"+JSON.stringify(otp))
+    console.log("otp " , otp)
 
-//     const expireotpin = new Date(Date.now() + 5 * 60 *  1000)
-//     finduser.otpexpire = expireotpin
+    const expireotpin = new Date(Date.now() + 5 * 60 *  1000)
+    finduser.otpexpire = expireotpin
 
-//     logger.info("otpexpire"+JSON.stringify(expireotpin))
-//     console.log("expiresin" , expireotpin)
+    logger.info("otpexpire"+JSON.stringify(expireotpin))
+    console.log("expiresin" , expireotpin)
 
-//     await finduser.save()
-//     logger.info("saved user with opt"+JSON.stringify(finduser))
+    await finduser.save()
+    logger.info("saved user with opt"+JSON.stringify(finduser))
     
     
-//     try {
-//         const sendopt = await axios.post(
-//             "https://www.fast2sms.com/dev/bulkV2",
-//             {
-//                 route: "otp",
-//                 variables_values: otp,
-//                 numbers: phone
-//             },
-//             {
-//                 headers: {
-//                     authorization: process.env.fast2sms,
-//                     "Content-Type": "application/json"
-//                 }
-//             }
-//         );
-//     } catch (error) {
-//         logger.info(error)
-//     }
+    try {
+        const sendopt = await axios.post(
+            "https://www.fast2sms.com/dev/bulkV2",
+            {
+                route: "otp",
+                variables_values: otp,
+                numbers: phone
+            },
+            {
+                headers: {
+                    authorization: process.env.fast2sms,
+                    "Content-Type": "application/json"
+                }
+            }
+        );
+    } catch (error) {
+        logger.info(error)
+    }
 
-//     // logger.info("sendopt" +JSON.stringify(sendopt))
-//     res.status(200).json({status : "success" , message : "opt send successfully" , data : finduser , otp : otp})
-// }
+    // logger.info("sendopt" +JSON.stringify(sendopt))
+    res.status(200).json({status : "success" , message : "opt send successfully" , data : finduser , otp : otp})
+}
 
 export {Regsiter , login ,forgetpassword}
